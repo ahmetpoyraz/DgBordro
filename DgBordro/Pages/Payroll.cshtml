@@ -1,0 +1,40 @@
+﻿@page
+@model DgBordro.Pages.PayrollModel
+@{
+}
+<h2>Dosya Yükleme</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken() 
+    <div class="mb-3">
+        <label class="form-label">Dosya Seç</label>
+        <input type="file" class="form-control" asp-for="UploadedFile" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Parola</label>
+        <input type="password" class="form-control" asp-for="Password" required>
+    </div>
+    <button type="submit" class="btn btn-primary" asp-page-handler="Upload">Yükle ve Şifrele</button>
+</form>
+
+<hr>
+
+<h2>Dosya İndirme</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken() 
+    <div class="mb-3">
+        <label class="form-label">Dosya Adı</label>
+        <input type="text" class="form-control" name="fileName" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Parola</label>
+        <input type="password" class="form-control" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-success" asp-page-handler="Download">Şifreyi Gir ve İndir</button>
+</form>
